@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { createQuoteObject, checkGuessedLetters, punctuations } from './game';
 
+import './App.css';
+
 const url = 'https://api.quotable.io/random?maxLength=200';
 
 const App = () => {
@@ -29,24 +31,23 @@ const App = () => {
 const Display = ({ quote, author, letterMap, scrambledQuote }) => {
   return (
     <article>
-      <>
-        <Quote letterMap={letterMap} scrambledQuote={scrambledQuote} />
-        <p>{`- ${author}`}</p>
-      </>
+      <Quote letterMap={letterMap} scrambledQuote={scrambledQuote} />
+      <p>{`- ${author}`}</p>
     </article>
   );
 };
 
 const Quote = ({ letterMap, scrambledQuote }) => {
-  console.log(letterMap);
   return (
     <div className="quote-list">
-      {[...scrambledQuote].map((char) => {
-        return !punctuations.includes(char) ? (
-          <LetterInput letter={char} />
-        ) : (
-          <h2>{char}</h2>
-        );
+      {[...scrambledQuote].map((char, index) => {
+        if (punctuations.includes(char)) {
+          return <h3 key={index}>{char}</h3>;
+        } else if (char === ' ') {
+          return <div key={index} className="space" />;
+        } else {
+          return <LetterInput key={index} letter={char} />;
+        }
       })}
     </div>
   );
