@@ -8,11 +8,16 @@
     padding-right: 1em;
 }
 
+.punctuation {
+    padding-right: 0.1em;
+    padding-left: 0.1em;
+}
+
 .letter-input-stack {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: 1em;
+    margin-top: 1.4em;
     padding-right: 0.1em;
 }
 

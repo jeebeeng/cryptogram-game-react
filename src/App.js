@@ -30,7 +30,7 @@ const App = () => {
 
 const Display = ({ quote, author, letterMap, scrambledQuote }) => {
   return (
-    <article className="main-display">
+    <article id="main-display">
       <Quote letterMap={letterMap} scrambledQuote={scrambledQuote} />
       <p className="author-label">{`- ${author}`}</p>
     </article>
@@ -42,7 +42,11 @@ const Quote = ({ letterMap, scrambledQuote }) => {
     <div className="quote-list">
       {[...scrambledQuote].map((char, index) => {
         if (punctuations.includes(char)) {
-          return <h3 key={index}>{char}</h3>;
+          return (
+            <h3 key={index} className="punctuation">
+              {char}
+            </h3>
+          );
         } else if (char === ' ') {
           return <div key={index} className="space" />;
         } else {
