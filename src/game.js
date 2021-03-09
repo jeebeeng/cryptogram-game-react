@@ -1,3 +1,8 @@
+/**
+ * Generates a random letter for each unique letter in the quote and maps them together
+ * @param {string} quote
+ * @returns {Map} map with keys as each letter in the quote and the value as an object containing the randomly assigned letter and an empty guess
+ */
 export const randomize = (quote) => {
   let map = new Map();
   let set = new Set();
@@ -51,6 +56,12 @@ export const randomize = (quote) => {
   return map;
 };
 
+/**
+ * Scrambles the quote using the given letterMap
+ * @param {string} quote
+ * @param {Map} letterMap
+ * @returns {string} quote scrambled using the given letterMap
+ */
 export const getScrambledQuote = (quote, letterMap) => {
   const scrambledQuote = quote
     .toUpperCase()
@@ -68,7 +79,7 @@ export const getScrambledQuote = (quote, letterMap) => {
 
 /**
  * Check if each of the guesses match the original letter (key)
- * @return whether each of the guesses match the original letter (key)
+ * @returns whether each of the guesses match the original letter (key)
  */
 export const checkGuessedLetters = (letterMap) => {
   [...letterMap.keys()].forEach((key) => {
