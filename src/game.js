@@ -11,6 +11,35 @@ export const createQuoteObject = (data) => {
   return object;
 };
 
+const letters = [
+  'A',
+  'B',
+  'C',
+  'D',
+  'E',
+  'F',
+  'G',
+  'H',
+  'I',
+  'J',
+  'K',
+  'L',
+  'M',
+  'N',
+  'O',
+  'P',
+  'Q',
+  'R',
+  'S',
+  'T',
+  'U',
+  'V',
+  'W',
+  'X',
+  'Y',
+  'Z',
+];
+export const punctuations = ['.', ',', ':', '!', '?', ';', ':', '-', "'"];
 /**
  * Generates a random letter for each unique letter in the quote and maps them together
  * @param {string} quote
@@ -20,36 +49,6 @@ const randomize = (quote) => {
   let map = new Map();
   let set = new Set();
   let usedLetters = [];
-  const letters = [
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F',
-    'G',
-    'H',
-    'I',
-    'J',
-    'K',
-    'L',
-    'M',
-    'N',
-    'O',
-    'P',
-    'Q',
-    'R',
-    'S',
-    'T',
-    'U',
-    'V',
-    'W',
-    'X',
-    'Y',
-    'Z',
-  ];
-  const punctuations = ['.', ',', ':', '!', '?', ';', ':', '-', "'"];
-
   [...quote.toUpperCase()].forEach((char) => {
     set.add(char);
   });
