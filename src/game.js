@@ -75,6 +75,19 @@ class Game {
     return scrambledQuote;
   };
 
+  /**
+   * Check if each of the guesses match the original letter (key)
+   * @return whether each of the guesses match the original letter (key)
+   */
+  checkGuessedLetters = () => {
+    [...this.letterMap.keys()].forEach((key) => {
+      if (this.letterMap.get(key).guess !== key) {
+        return false;
+      }
+      return true;
+    });
+  };
+
   #getRandomInt = (max) => {
     return Math.floor(Math.random() * Math.floor(max));
   };
