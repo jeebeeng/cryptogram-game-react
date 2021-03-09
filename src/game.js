@@ -2,10 +2,11 @@ class Game {
   constructor(quote) {
     this.author = quote.author;
     this.quote = quote.content;
-    this.map = this.randomize();
+    this.letterMap = this.#randomize();
+    this.scrambledQuote = this.#getScrambledQuote();
   }
 
-  randomize = () => {
+  #randomize = () => {
     let map = new Map();
     let set = new Set();
     let usedLetters = [];
@@ -37,30 +38,44 @@ class Game {
       'Y',
       'Z',
     ];
-    const punctuations = ['.', ',', ':', '!', '?', ';', ':', '-'];
+    const punctuations = ['.', ',', ':', '!', '?', ';', ':', '-', "'"];
 
-    [...this.quote].forEach((char) => {
+    [...this.quote.toUpperCase()].forEach((char) => {
       set.add(char);
     });
 
-    Array.from(set)
-      .filter((char) => {
-        return !(punctuations.includes(char) || char === ' ');
-      })
+    [...set]
+      .filter((char) => !punctuations.includes(char) && char !== ' ')
       .forEach((char) => {
+        char = char.toUpperCase();
         const filteredLetters = letters.filter(
-          (letter) => !(usedLetters.includes(letter) || letter === char)
+          (letter) => !usedLetters.includes(letter) && letter !== char
         );
-        const randomLetter =
-          filteredLetters[this.getRandomInt(filteredLetters.length)];
+        let randomLetter =
+          filteredLetters[this.#getRandomInt(filteredLetters.length)];
         usedLetters.push(randomLetter);
-        map.set(char.toUpperCase(), { assigned: randomLetter, guess: '' });
+        map.set(char, { assigned: randomLetter, guess: '' });
       });
 
     return map;
   };
 
-  getRandomInt = (max) => {
+  #getScrambledQuote = () => {
+    const scrambledQuote = this.quote
+      .toUpperCase()
+      .split('')
+      .map((letter) => {
+        if (this.letterMap.has(letter)) {
+          return this.letterMap.get(letter).assigned;
+        }
+        return letter;
+      })
+      .join('');
+
+    return scrambledQuote;
+  };
+
+  #getRandomInt = (max) => {
     return Math.floor(Math.random() * Math.floor(max));
   };
 }
