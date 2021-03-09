@@ -30,9 +30,9 @@ const App = () => {
 
 const Display = ({ quote, author, letterMap, scrambledQuote }) => {
   return (
-    <article>
+    <article className="main-display">
       <Quote letterMap={letterMap} scrambledQuote={scrambledQuote} />
-      <p>{`- ${author}`}</p>
+      <p className="author-label">{`- ${author}`}</p>
     </article>
   );
 };
@@ -54,7 +54,12 @@ const Quote = ({ letterMap, scrambledQuote }) => {
 };
 
 const LetterInput = ({ letter }) => {
-  return <p>{letter}</p>;
+  return (
+    <div className="letter-input-stack">
+      <input className="letter-input" type="text" maxLength="1" />
+      <p className="letter-label">{letter}</p>
+    </div>
+  );
 };
 
 export default App;
