@@ -1,0 +1,9 @@
+.quote-list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.space {
+    padding-right: 1rem;
+}
