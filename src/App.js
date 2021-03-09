@@ -30,10 +30,10 @@ const App = () => {
 
 const Display = ({ quote, author, letterMap, scrambledQuote }) => {
   return (
-    <article id="main-display">
+    <div id="main-display">
       <Quote letterMap={letterMap} scrambledQuote={scrambledQuote} />
       <p className="author-label">{`- ${author}`}</p>
-    </article>
+    </div>
   );
 };
 

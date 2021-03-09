@@ -1,3 +1,8 @@
+#main-display {
+    width: 80%;
+    margin: 0 auto;
+}
+
 .quote-list {
     display: flex;
     flex-wrap: wrap;
