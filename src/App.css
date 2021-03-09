@@ -5,5 +5,24 @@
 }
 
 .space {
-    padding-right: 1rem;
+    padding-right: 1em;
+}
+
+.letter-input-stack {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 1em;
+    padding-right: 0.1em;
+}
+
+.letter-input {
+    width: 1em;
+    text-align: center;
+
+}
+
+.letter-label {
+    align-self: center;
+    margin-top: 0;
 }
