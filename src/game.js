@@ -1,9 +1,22 @@
+export const createQuoteObject = (data) => {
+  const { content, author } = data;
+  const letterMap = randomize(content);
+  const scrambled = getScrambledQuote(content, letterMap);
+  const object = {
+    quote: content,
+    author: author,
+    letterMap: letterMap,
+    scrambledQuote: scrambled,
+  };
+  return object;
+};
+
 /**
  * Generates a random letter for each unique letter in the quote and maps them together
  * @param {string} quote
  * @returns {Map} map with keys as each letter in the quote and the value as an object containing the randomly assigned letter and an empty guess
  */
-export const randomize = (quote) => {
+const randomize = (quote) => {
   let map = new Map();
   let set = new Set();
   let usedLetters = [];
@@ -62,7 +75,7 @@ export const randomize = (quote) => {
  * @param {Map} letterMap
  * @returns {string} quote scrambled using the given letterMap
  */
-export const getScrambledQuote = (quote, letterMap) => {
+const getScrambledQuote = (quote, letterMap) => {
   const scrambledQuote = quote
     .toUpperCase()
     .split('')
