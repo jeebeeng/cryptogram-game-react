@@ -3,7 +3,7 @@ import { checkGuessedLetters, createQuoteObject, punctuations } from './game';
 
 import './App.css';
 
-const url = 'https://api.quotable.io/random?maxLength=200';
+const url = 'https://api.quotable.io/random';
 const GameContext = React.createContext();
 
 const App = () => {
