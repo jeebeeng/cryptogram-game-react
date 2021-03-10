@@ -1,6 +1,9 @@
 #main-display {
-    width: 80%;
-    margin: 0 auto;
+    width: 70%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -90%);
 }
 
 .quote-list {
@@ -21,7 +24,6 @@
 .letter-input-stack {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     margin-top: 1.4em;
     padding-right: 0.1em;
 }
