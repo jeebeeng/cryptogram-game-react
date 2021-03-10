@@ -91,7 +91,10 @@ const LetterInput = ({ letter }) => {
   const onChangeHandler = (e) => {
     const map = new Map(game.letterMap);
     const letterObject = map.get(key);
-    const updatedObject = { ...letterObject, guess: e.target.value };
+    const updatedObject = {
+      ...letterObject,
+      guess: e.target.value.toUpperCase(),
+    };
     map.set(key, updatedObject);
     setGame({ ...game, letterMap: map });
   };
