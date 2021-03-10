@@ -106,7 +106,7 @@ const LetterInput = ({ letter }) => {
         letterKey.current = key;
       }
     });
-  }, [letterMap]);
+  }, [letterMap, letter]);
 
   return (
     <div className="letter-input-stack">
