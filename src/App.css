@@ -6,6 +6,15 @@
     transform: translate(-50%, -90%);
 }
 
+@media (max-width: 500px) {
+    #main-display {
+        width: 80%;
+        position: relative;
+        top: 0;
+        transform: translate(-50%)
+    }
+}
+
 .loader {
     border: 10px solid #f3f3f3;
     border-top: 10px solid #a9a9a9;
