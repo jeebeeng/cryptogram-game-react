@@ -58,7 +58,7 @@ const randomize = (quote) => {
     .forEach((char) => {
       char = char.toUpperCase();
       const filteredLetters = letters.filter(
-        (letter) => !usedLetters.includes(letter) && letter !== char
+        (letter) => !usedLetters.includes(letter)
       );
       let randomLetter = filteredLetters[getRandomInt(filteredLetters.length)];
       usedLetters.push(randomLetter);
