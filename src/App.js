@@ -10,9 +10,10 @@ const App = () => {
   const [game, setGame] = useState({
     quote: '',
     author: '',
-    letterMap: null,
+    letterMap: new Map(),
     scrambledQuote: '',
   });
+  const [win, setWin] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const getQuote = async () => {
@@ -26,12 +27,16 @@ const App = () => {
     getQuote();
   }, []);
 
+  useEffect(() => {
+    setWin(checkGuessedLetters(game.letterMap));
+  }, [game]);
+
   return (
     <>
       {loading ? (
         <div className="loader"></div>
       ) : (
-        <GameContext.Provider value={{ game, setGame }}>
+        <GameContext.Provider value={{ game, setGame, win }}>
           <Display />
         </GameContext.Provider>
       )}
@@ -84,7 +89,7 @@ const Word = ({ word, index }) => {
 const LetterInput = ({ letter }) => {
   const [guess, setGuess] = useState('');
 
-  const { game, setGame } = useContext(GameContext);
+  const { game, setGame, win } = useContext(GameContext);
   const { letterMap } = game;
   const keyRef = useRef('');
 
@@ -115,7 +120,7 @@ const LetterInput = ({ letter }) => {
         type="text"
         value={guess}
         maxLength="1"
-        onChange={(e) => onChangeHandler(e)}
+        onChange={(e) => (win ? null : onChangeHandler(e))}
       />
       <p className="letter-label">{letter}</p>
     </div>
