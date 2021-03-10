@@ -83,19 +83,20 @@ const Word = ({ word, index }) => {
 
 const LetterInput = ({ letter }) => {
   const [guess, setGuess] = useState('');
-  const [key, setKey] = useState('');
 
   const { game, setGame } = useContext(GameContext);
   const { letterMap } = game;
 
+  let letterKey = '';
+
   const onChangeHandler = (e) => {
     const map = new Map(game.letterMap);
-    const letterObject = map.get(key);
+    const letterObject = map.get(letterKey);
     const updatedObject = {
       ...letterObject,
       guess: e.target.value.toUpperCase(),
     };
-    map.set(key, updatedObject);
+    map.set(letterKey, updatedObject);
     setGame({ ...game, letterMap: map });
   };
 
@@ -103,7 +104,7 @@ const LetterInput = ({ letter }) => {
     [...letterMap.keys()].forEach((key) => {
       if (letterMap.get(key).assigned === letter) {
         setGuess(letterMap.get(key).guess);
-        setKey(key);
+        letterKey = key;
       }
     });
   }, [letterMap]);
