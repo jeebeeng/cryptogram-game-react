@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { createQuoteObject, checkGuessedLetters, punctuations } from './game';
+import React, { useEffect, useState, useContext, useRef } from 'react';
+import { createQuoteObject, punctuations } from './game';
 
 import './App.css';
 
@@ -86,8 +86,7 @@ const LetterInput = ({ letter }) => {
 
   const { game, setGame } = useContext(GameContext);
   const { letterMap } = game;
-
-  let letterKey = '';
+  const letterKey = useRef('');
 
   const onChangeHandler = (e) => {
     const map = new Map(game.letterMap);
@@ -104,7 +103,7 @@ const LetterInput = ({ letter }) => {
     [...letterMap.keys()].forEach((key) => {
       if (letterMap.get(key).assigned === letter) {
         setGuess(letterMap.get(key).guess);
-        letterKey = key;
+        letterKey.current = key;
       }
     });
   }, [letterMap]);
