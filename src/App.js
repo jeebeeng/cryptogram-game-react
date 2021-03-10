@@ -22,7 +22,9 @@ const App = () => {
     setLoading(false);
   };
 
-  useEffect(getQuote, []);
+  useEffect(() => {
+    getQuote();
+  }, []);
 
   return (
     <>
