@@ -31,7 +31,7 @@ const App = () => {
       {loading ? (
         <h1>Loading...</h1>
       ) : (
-        <GameContext.Provider value={{ game }}>
+        <GameContext.Provider value={{ game, setGame }}>
           <Display />
         </GameContext.Provider>
       )}
@@ -55,24 +55,9 @@ const Quote = () => {
   const { scrambledQuote } = game;
   return (
     <div className="quote-list">
-      {
-        scrambledQuote.split(' ').map((word, index) => {
-          return <Word word={word} index={index} />;
-        })
-        /* {[...scrambledQuote].map((char, index) => {
-        if (punctuations.includes(char)) {
-          return (
-            <h3 key={index} className="punctuation">
-              {char}
-            </h3>
-          );
-        } else if (char === ' ') {
-          return <div key={index} className="space" />;
-        } else {
-          return <LetterInput key={index} letter={char} />;
-        }
-      })} */
-      }
+      {scrambledQuote.split(' ').map((word, index) => {
+        return <Word key={index} word={word} index={index} />;
+      })}
     </div>
   );
 };
@@ -97,9 +82,38 @@ const Word = ({ word, index }) => {
 };
 
 const LetterInput = ({ letter }) => {
+  const [guess, setGuess] = useState('');
+  const [key, setKey] = useState('');
+
+  const { game, setGame } = useContext(GameContext);
+  const { letterMap } = game;
+
+  const onChangeHandler = (e) => {
+    const map = new Map(game.letterMap);
+    const letterObject = map.get(key);
+    const updatedObject = { ...letterObject, guess: e.target.value };
+    map.set(key, updatedObject);
+    setGame({ ...game, letterMap: map });
+  };
+
+  useEffect(() => {
+    [...letterMap.keys()].forEach((key) => {
+      if (letterMap.get(key).assigned === letter) {
+        setGuess(letterMap.get(key).guess);
+        setKey(key);
+      }
+    });
+  }, [letterMap]);
+
   return (
     <div className="letter-input-stack">
-      <input className="letter-input" type="text" maxLength="1" />
+      <input
+        className="letter-input"
+        type="text"
+        value={guess}
+        maxLength="1"
+        onChange={(e) => onChangeHandler(e)}
+      />
       <p className="letter-label">{letter}</p>
     </div>
   );
