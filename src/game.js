@@ -94,12 +94,12 @@ const getScrambledQuote = (quote, letterMap) => {
  * @returns whether each of the guesses match the original letter (key)
  */
 export const checkGuessedLetters = (letterMap) => {
-  [...letterMap.keys()].forEach((key) => {
-    if (letterMap.get(key).guess !== key) {
-      return false;
-    }
-    return true;
+  let result = true;
+  [...letterMap.keys()].some((key) => {
+    result = letterMap.get(key).guess === key;
+    return !result;
   });
+  return result;
 };
 
 const getRandomInt = (max) => {
