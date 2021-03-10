@@ -29,7 +29,7 @@ const App = () => {
   return (
     <>
       {loading ? (
-        <h1>Loading...</h1>
+        <div className="loader"></div>
       ) : (
         <GameContext.Provider value={{ game, setGame }}>
           <Display />
