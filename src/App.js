@@ -30,7 +30,6 @@ const App = () => {
 
   useEffect(() => {
     setWin(checkGuessedLetters(game.letterMap));
-    setSelected('');
   }, [game]);
 
   return (
