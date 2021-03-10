@@ -22,9 +22,7 @@ const App = () => {
     setLoading(false);
   };
 
-  useEffect(() => {
-    getQuote();
-  }, []);
+  useEffect(getQuote, []);
 
   return (
     <>
@@ -86,16 +84,16 @@ const LetterInput = ({ letter }) => {
 
   const { game, setGame } = useContext(GameContext);
   const { letterMap } = game;
-  const letterKey = useRef('');
+  const keyRef = useRef('');
 
   const onChangeHandler = (e) => {
     const map = new Map(game.letterMap);
-    const letterObject = map.get(letterKey);
+    const letterObject = map.get(keyRef.current);
     const updatedObject = {
       ...letterObject,
       guess: e.target.value.toUpperCase(),
     };
-    map.set(letterKey, updatedObject);
+    map.set(keyRef.current, updatedObject);
     setGame({ ...game, letterMap: map });
   };
 
@@ -103,7 +101,7 @@ const LetterInput = ({ letter }) => {
     [...letterMap.keys()].forEach((key) => {
       if (letterMap.get(key).assigned === letter) {
         setGuess(letterMap.get(key).guess);
-        letterKey.current = key;
+        keyRef.current = key;
       }
     });
   }, [letterMap, letter]);
