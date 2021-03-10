@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
-import { createQuoteObject, punctuations } from './game';
+import { checkGuessedLetters, createQuoteObject, punctuations } from './game';
 
 import './App.css';
 
@@ -93,7 +93,7 @@ const LetterInput = ({ letter }) => {
     const letterObject = map.get(keyRef.current);
     const updatedObject = {
       ...letterObject,
-      guess: e.target.value.toUpperCase(),
+      guess: e.target.value.toUpperCase().substring(0, 1),
     };
     map.set(keyRef.current, updatedObject);
     setGame({ ...game, letterMap: map });
