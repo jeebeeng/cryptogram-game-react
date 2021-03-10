@@ -12,6 +12,11 @@
     flex-direction: row;
 }
 
+.word {
+    display: flex;
+    flex-direction: row;
+}
+
 .space {
     padding-right: 1em;
 }
