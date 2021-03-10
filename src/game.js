@@ -39,7 +39,7 @@ const letters = [
   'Y',
   'Z',
 ];
-export const punctuations = ['.', ',', ':', '!', '?', ';', ':', '-', "'"];
+export const punctuations = ['.', ',', ':', '!', '?', ';', ':', '-', "'", '"'];
 /**
  * Generates a random letter for each unique letter in the quote and maps them together
  * @param {string} quote
