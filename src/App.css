@@ -36,7 +36,7 @@
 .letter-input {
     width: 1em;
     text-align: center;
-
+    caret-color: transparent;
 }
 
 .letter-label {
