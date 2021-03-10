@@ -75,6 +75,12 @@
     caret-color: transparent;
 }
 
+
+input:focus,
+.selected {
+    border: black solid 2px;
+}
+
 .letter-label {
     align-self: center;
     margin-top: 0;

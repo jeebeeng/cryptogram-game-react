@@ -14,6 +14,7 @@ const App = () => {
     scrambledQuote: '',
   });
   const [win, setWin] = useState(false);
+  const [selected, setSelected] = useState('');
   const [loading, setLoading] = useState(true);
 
   const getQuote = async () => {
@@ -29,6 +30,7 @@ const App = () => {
 
   useEffect(() => {
     setWin(checkGuessedLetters(game.letterMap));
+    setSelected('');
   }, [game]);
 
   return (
@@ -36,7 +38,9 @@ const App = () => {
       {loading ? (
         <div className="loader"></div>
       ) : (
-        <GameContext.Provider value={{ game, setGame, win }}>
+        <GameContext.Provider
+          value={{ game, setGame, win, selected, setSelected }}
+        >
           <Display />
         </GameContext.Provider>
       )}
@@ -89,7 +93,7 @@ const Word = ({ word, index }) => {
 const LetterInput = ({ letter }) => {
   const [guess, setGuess] = useState('');
 
-  const { game, setGame, win } = useContext(GameContext);
+  const { game, setGame, win, selected, setSelected } = useContext(GameContext);
   const { letterMap } = game;
   const keyRef = useRef('');
 
@@ -116,11 +120,12 @@ const LetterInput = ({ letter }) => {
   return (
     <div className="letter-input-stack">
       <input
-        className="letter-input"
+        className={`letter-input ${selected === letter ? 'selected' : ''}`}
         type="text"
         value={guess}
         maxLength="1"
         onChange={(e) => (win ? null : onChangeHandler(e))}
+        onFocus={() => setSelected(letter)}
       />
       <p className="letter-label">{letter}</p>
     </div>
